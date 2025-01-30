@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'; // 👈 Router importieren
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -13,6 +14,8 @@ export class NavigationComponent {
   currentLang = 'de';
   isMenuOpen = false;
 
+  constructor(private router: Router) {} 
+
   toggleLanguage() {
     this.currentLang = this.currentLang === 'de' ? 'en' : 'de';
   }
@@ -25,5 +28,24 @@ export class NavigationComponent {
   closeMenu() {
     this.isMenuOpen = false;
     document.body.style.overflow = '';
+  }
+
+  scrollToSection(sectionId: string) {
+    if (this.router.url === '/') {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      this.router.navigate(['/']).then(() => {
+        setTimeout(() => {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      });
+    }
+    this.closeMenu(); 
   }
 }

@@ -1,7 +1,23 @@
 <div class="app-wrapper">
   <div class="container">
     <app-navigation></app-navigation>
-    <router-outlet></router-outlet>
+
+    <section id="home">
+      <router-outlet></router-outlet>
+    </section>
+
+    <section id="about-me">
+      <app-about></app-about>
+    </section>
+
+    <section id="projects">
+      <app-projects></app-projects>
+    </section>
+
+    <section id="contact">
+      <app-contact></app-contact>
+    </section>
+
     <footer>
       <p>&copy; 2025 Dein Name</p>
     </footer>
