@@ -1,7 +1,7 @@
 <nav>
   <div class="container">
     <div class="nav-content">
-      <div class="logo">
+      <a routerLink="/" class="logo">
         <svg width="60" height="40" viewBox="0 0 60 40" class="logo-svg">
           <path d="M10 35 L10 5 L20 20 L30 5 L30 35" class="logo-path first-m"
             stroke="url(#nav-gradient)" fill="none" stroke-width="2" pathLength="100"/>
@@ -14,7 +14,7 @@
             </linearGradient>
           </defs>
         </svg>
-      </div>
+      </a>
 
       <!-- Desktop Navigation -->
       <ul class="desktop-nav">
@@ -28,11 +28,7 @@
       <div class="lang-switcher desktop-lang">
         <button (click)="toggleLanguage()">
           <span>{{ currentLang }}</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <circle cx="12" cy="12" r="10" stroke-width="2"/>
-            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="2"/>
-            <path d="M2 12h20" stroke-width="2"/>
-          </svg>
+          <mat-icon>language</mat-icon>
         </button>
       </div>
 
@@ -45,23 +41,21 @@
 
       <!-- Mobile Overlay -->
       <div class="overlay" [class.active]="isMenuOpen">
-        <ul>
-          <li><a (click)="scrollToSection('home')">Home</a></li>
-          <li><a (click)="scrollToSection('about-me')">Über mich</a></li>
-          <li><a (click)="scrollToSection('projects')">Projekte</a></li>
-          <li><a (click)="scrollToSection('contact')">Kontakt</a></li>
-        </ul>
+        <div class="overlay-content">
+          <ul>
+            <li><a (click)="scrollToSection('home')">Home</a></li>
+            <li><a (click)="scrollToSection('about-me')">Über mich</a></li>
+            <li><a (click)="scrollToSection('projects')">Projekte</a></li>
+            <li><a (click)="scrollToSection('contact')">Kontakt</a></li>
+          </ul>
 
-        <!-- Mobile Language Switcher -->
-        <div class="lang-switcher">
-          <button (click)="toggleLanguage()">
-            <span>{{ currentLang }}</span>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <circle cx="12" cy="12" r="10" stroke-width="2"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" stroke-width="2"/>
-              <path d="M2 12h20" stroke-width="2"/>
-            </svg>
-          </button>
+          <!-- Mobile Language Switcher -->
+          <div class="lang-switcher">
+            <button (click)="toggleLanguage()">
+              <span>{{ currentLang }}</span>
+              <mat-icon>language</mat-icon>
+            </button>
+          </div>
         </div>
       </div>
     </div>

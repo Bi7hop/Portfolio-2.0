@@ -1,14 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 nav {
   padding: 24px 0;
-  position: relative;
-  background-color: var(--background-color);
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  background: #0f172a;
+  font-family: 'Poppins', sans-serif;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.1), transparent 70%);
+    animation: pulse 8s ease-in-out infinite;
+    z-index: 1;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-content {
+  position: relative;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  max-width: 1200px;
+  padding: 0 32px;
 }
 
 .logo {
@@ -51,23 +80,16 @@ nav {
 
   li {
     a {
-      color: var(--text-color);
+      cursor: pointer;
       text-decoration: none;
       position: relative;
-      transition: color 0.3s;
-      font-size: 24px;
+      font-size: 16px;
       font-weight: 500;
-
-      &:hover {
-        background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        transform: scale(1.1); 
-        &::after {
-          width: 100%;
-        }
-      }
+      background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transition: all 0.3s ease;
 
       &::after {
         content: '';
@@ -76,14 +98,73 @@ nav {
         left: 0;
         width: 0;
         height: 2px;
-        transition: width 0.3s;
+        background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+        transition: width 0.3s ease;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+        
+        &::after {
+          width: 100%;
+        }
       }
     }
   }
 }
 
-.desktop-lang {
-  margin-left: 32px;
+.lang-switcher {
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid transparent;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+      opacity: 0.1;
+      transition: opacity 0.3s ease;
+    }
+
+    span {
+      text-transform: uppercase;
+      background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 500;
+    }
+
+    mat-icon {
+      font-size: 20px;
+      background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    &:hover {
+      transform: scale(1.05);
+      border-color: rgb(236, 72, 153);
+
+      &::before {
+        opacity: 0.2;
+      }
+    }
+  }
 }
 
 .burger {
@@ -93,13 +174,13 @@ nav {
   width: 30px;
   height: 24px;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 10000;
 
   span {
     display: block;
     width: 100%;
-    height: 3px;
-    background-color: var(--text-color);
+    height: 2px;
+    background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
     transition: all 0.3s ease;
   }
 
@@ -122,92 +203,80 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: #0f172a;
   display: none;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 998;
+  transition: opacity 0.3s ease;
+  z-index: 9999;
 
   &.active {
     opacity: 1;
     visibility: visible;
+    display: flex;
+    z-index: 9999;
   }
+}
+
+.overlay-content {
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 
   ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
     list-style: none;
     margin: 0;
     padding: 0;
-    text-align: center;
 
     li {
-      margin: 20px 0;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
 
       a {
-        color: white;
+        cursor: pointer;
+        font-size: 32px;
+        font-weight: 500;
         text-decoration: none;
-        font-size: 24px;
-        position: relative;
-        transition: color 0.3s;
+        background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transition: transform 0.3s ease;
 
         &:hover {
-          color: var(--hover-color);
-
-          &::after {
-            width: 100%;
-          }
-        }
-
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: -5px;
-          left: 0;
-          width: 0;
-          height: 1px;
-          background-color: var(--hover-color);
-          transition: width 0.3s;
+          transform: scale(1.1);
         }
       }
     }
   }
 
   .lang-switcher {
-    margin-top: 40px;
+    margin-top: 48px;
   }
 }
 
-.lang-switcher {
-  button {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 16px;
-    background: linear-gradient(90deg, rgb(139, 92, 246) 0%, rgb(236, 72, 153) 100%);
-    border: none;
-    border-radius: 9999px;
-    color: white;
-    cursor: pointer;
-    transition: transform 0.3s;
-
-    &:hover {
-      transform: scale(1.1);
-    }
-
-    svg {
-      stroke: currentColor;
-    }
-
-    span {
-      text-transform: uppercase;
+.overlay.active .overlay-content ul li {
+  transform: translateY(0);
+  opacity: 1;
+  @for $i from 1 through 4 {
+    &:nth-child(#{$i}) {
+      transition-delay: #{$i * 0.1}s;
     }
   }
 }
+
 
 @media (max-width: 768px) {
   .desktop-nav,
@@ -236,5 +305,14 @@ nav {
   }
   100% {
     stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    transform: scale(1); 
+  }
+  50% { 
+    transform: scale(1.2); 
   }
 }
