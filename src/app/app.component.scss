@@ -1,0 +1,143 @@
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 32px;
+    background: linear-gradient(to bottom right, #000000, #1a2a2a);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero-content {
+    margin-top: 15vh;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+    z-index: 1;
+    
+    .job-title {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #ffffff;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+    
+    .name {
+      font-size: 64px;
+      margin-bottom: 32px;
+      letter-spacing: 2px;
+      color: #ffffff;
+      font-weight: 700;
+    }
+  }
+  
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 32px;
+    
+    .btn {
+      padding: 12px 24px;
+      border: 1px solid #ffffff;
+      border-radius: 25px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: 18px;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: #ffffff;
+        color: #000000;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+    }
+  }
+  
+  .scroll-info {
+    margin-top: auto;
+    width: 100%;
+    overflow: hidden;
+    padding: 20px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    
+    .timeline {
+      display: flex;
+      gap: 32px;
+      animation: scrollText 20s linear infinite;
+      
+      .info-item {
+        white-space: nowrap;
+        color: #ffffff;
+        opacity: 0.7;
+        font-size: 18px;
+        padding: 0 16px;
+        
+        &:not(:last-child)::after {
+          content: "•";
+          margin-left: 32px;
+          opacity: 0.5;
+        }
+      }
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes scrollText {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  // Media Queries für Responsiveness
+  @media (max-width: 768px) {
+    .hero-content {
+      .job-title {
+        font-size: 20px;
+      }
+      
+      .name {
+        font-size: 48px;
+      }
+    }
+    
+    .cta-buttons {
+      flex-direction: column;
+      align-items: flex-start;
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero {
+      padding: 16px;
+    }
+    
+    .hero-content {
+      .name {
+        font-size: 36px;
+      }
+    }
+    
+    .scroll-info .info-item {
+      font-size: 16px;
+    }
+  }

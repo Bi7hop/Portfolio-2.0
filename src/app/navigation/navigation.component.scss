@@ -1,0 +1,240 @@
+nav {
+  padding: 24px 0;
+  position: relative;
+  background-color: var(--background-color);
+}
+
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.logo {
+  .logo-svg {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    .logo-path {
+      stroke-dasharray: 100;
+      stroke-dashoffset: 100;
+      animation: drawLogo 3s ease-out forwards;
+    }
+
+    .second-m {
+      animation-delay: 1s;
+    }
+  }
+
+  &:hover {
+    .logo-svg {
+      transform: scale(1.1);
+    }
+
+    .logo-path {
+      animation: redraw 2s ease-out forwards;
+    }
+
+    .second-m {
+      animation-delay: 0.5s;
+    }
+  }
+}
+
+.desktop-nav {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 32px;
+
+  li {
+    a {
+      color: var(--text-color);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+      font-size: 24px;
+      font-weight: 500;
+
+      &:hover {
+        background: linear-gradient(90deg, rgb(139, 92, 246), rgb(236, 72, 153));
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        transform: scale(1.1); 
+        &::after {
+          width: 100%;
+        }
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        transition: width 0.3s;
+      }
+    }
+  }
+}
+
+.desktop-lang {
+  margin-left: 32px;
+}
+
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 24px;
+  cursor: pointer;
+  z-index: 1000;
+
+  span {
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+  }
+
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 998;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    li {
+      margin: 20px 0;
+
+      a {
+        color: white;
+        text-decoration: none;
+        font-size: 24px;
+        position: relative;
+        transition: color 0.3s;
+
+        &:hover {
+          color: var(--hover-color);
+
+          &::after {
+            width: 100%;
+          }
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 1px;
+          background-color: var(--hover-color);
+          transition: width 0.3s;
+        }
+      }
+    }
+  }
+
+  .lang-switcher {
+    margin-top: 40px;
+  }
+}
+
+.lang-switcher {
+  button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: linear-gradient(90deg, rgb(139, 92, 246) 0%, rgb(236, 72, 153) 100%);
+    border: none;
+    border-radius: 9999px;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    svg {
+      stroke: currentColor;
+    }
+
+    span {
+      text-transform: uppercase;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .desktop-nav,
+  .desktop-lang {
+    display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .overlay {
+    display: flex;
+  }
+}
+
+@keyframes drawLogo {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes redraw {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
